@@ -9,11 +9,11 @@ export function SiteFooter() {
         <div className="flex flex-col items-center gap-6">
           <div className="flex items-center gap-2">
             <Image
-              src="/logo.jpg"
+              src="/wfc_thicks.jpg"
               alt="Word Faith Church Logo"
               width={32}
               height={32}
-              className="h-8 w-8 object-contain"
+              className="h-8 w-8 object-contain rounded-full"
             />
             <span className="text-lg font-bold">Word Faith Church</span>
           </div>

@@ -22,7 +22,7 @@ export function AdminSidebar() {
       <div className="p-6">
         <div className="flex items-center gap-2 mb-8">
           <Church className="h-6 w-6" />
-          <span className="text-lg font-bold">Grace Church</span>
+          <span className="text-lg font-bold"> WFC</span>
         </div>
         <nav className="space-y-2">
           {navItems.map((item) => {

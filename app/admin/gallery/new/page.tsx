@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { ImageUpload } from "@/components/admin/image-upload"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
@@ -65,16 +66,12 @@ export default function NewGalleryImagePage() {
                 required
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="image_url">Image URL</Label>
-              <Input
-                id="image_url"
-                value={formData.image_url}
-                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                placeholder="/placeholder.svg?height=400&width=600"
-                required
-              />
-            </div>
+            <ImageUpload
+              label="Gallery Image"
+              currentImageUrl={formData.image_url}
+              onImageUploaded={(url) => setFormData({ ...formData, image_url: url })}
+              required
+            />
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea

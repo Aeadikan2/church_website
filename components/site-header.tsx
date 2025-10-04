@@ -7,11 +7,11 @@ export function SiteHeader() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.jpg"
+            src="/wfc_thicks.jpg"
             alt="Word Faith Church Logo"
             width={40}
             height={40}
-            className="h-10 w-10 object-contain"
+            className="h-10 w-10 object-contain rounded-full"
           />
           <span className="text-xl font-bold text-[#800020]">Word Faith Church</span>
         </Link>

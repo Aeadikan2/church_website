@@ -24,11 +24,11 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-[#800020] text-white py-24">
+      <section className="relative bg-[#66001A] text-white py-24">
         <div
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: "url('/church-interior-with-stained-glass.jpg')",
+            backgroundImage: "url('/wfc4.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
