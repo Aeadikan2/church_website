@@ -4,12 +4,13 @@ import type React from "react"
 
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import HeroCarousel from "@/components/hero-carousel"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Mail, MapPin, Phone, Facebook, Instagram, Send } from "lucide-react"
+import { BookOpen, MapPin, Phone, Facebook, Instagram, Send } from "lucide-react"
 import Link from "next/link"
 
 export default function ContactPage() {
@@ -46,13 +47,13 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="bg-[#800020] text-white py-16">
-        <div className="container">
-          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl text-white/90">We'd love to hear from you</p>
-        </div>
-      </section>
+      {/* Hero Section (carousel) */}
+      <HeroCarousel
+        page="contact"
+        height={320}
+        title={"Get in Touch"}
+        subtitle={"Have questions or prayer requests? Reach out — we'd love to hear from you."}
+      />
 
       {/* Contact Form & Info */}
       <section className="py-16">
@@ -132,9 +133,9 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    123 Faith Street
+                    Faith Tent, back of Plan A lodge, back of Lorem
                     <br />
-                    City, State 12345
+                    Keffi, Nasarawa State.
                   </p>
                 </CardContent>
               </Card>
@@ -147,14 +148,14 @@ export default function ContactPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">(555) 123-4567</p>
+                  <p className="text-muted-foreground">(+234) 704-468-7939</p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <Mail className="h-6 w-6 text-[#800020]" />
+                    <BookOpen className="h-6 w-6 text-[#800020]" />
                     <CardTitle>Sermons</CardTitle>
                   </div>
                 </CardHeader>
@@ -162,7 +163,7 @@ export default function ContactPage() {
                   <p className="text-muted-foreground mb-4">For more sermons, please visit our social media handles</p>
                   <div className="flex items-center gap-4">
                     <Link
-                      href="https://facebook.com"
+                      href="https://www.facebook.com/share/16xn7ojzMR/?mibextid=wwXIfr"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#800020] hover:text-[#600018] transition-colors"
@@ -171,7 +172,7 @@ export default function ContactPage() {
                       <Facebook className="h-6 w-6" />
                     </Link>
                     <Link
-                      href="https://t.me"
+                      href="https://t.me/thewordfaithchurch01"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#800020] hover:text-[#600018] transition-colors"
@@ -180,7 +181,7 @@ export default function ContactPage() {
                       <Send className="h-6 w-6" />
                     </Link>
                     <Link
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/wfc_online?igsh=MWZzd2dlMHc1b2FwbA%3D%3D&utm_source=qr"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#800020] hover:text-[#600018] transition-colors"

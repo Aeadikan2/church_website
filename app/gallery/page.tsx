@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
+import HeroCarousel from "@/components/hero-carousel"
+import GalleryViewer from "@/components/gallery-viewer"
 
 export default async function GalleryPage() {
   const supabase = await createClient()
@@ -6,37 +8,30 @@ export default async function GalleryPage() {
   const { data: images } = await supabase.from("gallery_images").select("*").order("uploaded_at", { ascending: false })
 
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="bg-[#800020] text-white py-16">
-        <div className="container">
-          <h1 className="text-4xl font-bold mb-4">Gallery</h1>
-          <p className="text-xl text-white/90">Moments from our church community</p>
-        </div>
-      </section>
+    <main className="flex flex-col">
+      {/* Hero Section (carousel) */}
+      <HeroCarousel
+        page="gallery"
+        height={320}
+        title={"Moments from Our Community"}
+        subtitle={"Snapshots of worship, fellowship and life at Word Faith Church."}
+      />
 
       {/* Gallery Grid */}
       <section className="py-16">
         <div className="container">
-          <div className="grid gap-4 md:grid-cols-3">
-            {images?.map((image) => (
-              <div key={image.id} className="group relative overflow-hidden rounded-lg aspect-square">
-                <img
-                  src={image.image_url || "/placeholder.svg"}
-                  alt={image.title}
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                  <div className="text-white">
-                    <h3 className="font-semibold">{image.title}</h3>
-                    {image.description && <p className="text-sm text-white/80">{image.description}</p>}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-[#800020]">Gallery Highlights</h2>
+            <p className="text-sm text-slate-600">Click any image to view larger</p>
           </div>
+
+          {images && images.length > 0 ? (
+            <GalleryViewer images={images} />
+          ) : (
+            <div className="text-sm text-slate-600">No images available.</div>
+          )}
         </div>
       </section>
-    </div>
+    </main>
   )
 }

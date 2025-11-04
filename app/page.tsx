@@ -1,8 +1,11 @@
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, Heart, Users } from "lucide-react"
+import { Calendar, Heart, Users, BookOpen } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import HeroCarousel from "@/components/hero-carousel"
+import LiveGivePanel from "@/components/live-give-panel"
+import GivePopup from "@/components/give-popup"
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -22,128 +25,169 @@ export default async function HomePage() {
     .limit(2)
 
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-[#66001A] text-white py-24">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: "url('/wfc4.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div className="container relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl font-bold mb-6 text-balance">Welcome to Word Faith Church</h1>
-            <p className="text-xl mb-8 text-white/90 leading-relaxed">
-              The church's core FOCUS is the younger generation, building and mentoring their future and God-ordained destiny.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/about">Learn More</Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent text-white border-white hover:bg-white hover:text-[#800020]"
-                asChild
-              >
-                <Link href="/contact">Visit Us</Link>
-              </Button>
+    <main className="flex flex-col">
+      {/* Hero */}
+      <HeroCarousel
+        page="home"
+        height={480}
+        title={"Welcome to Word Faith Church"}
+        subtitle={"A place to grow in faith, worship boldly and serve our community."}
+        primaryLabel={"Learn More"}
+        primaryHref={'/about'}
+        secondaryLabel={"Visit Us"}
+        secondaryHref={'/contact'}
+      />
+
+      {/* Highlights */}
+      <section className="py-10">
+        <div className="container">
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card className="text-center p-6">
+              <div className="mx-auto mb-3">
+                <BookOpen className="h-10 w-10 text-[#800020] mx-auto" />
+              </div>
+              <CardTitle className="text-lg">Sermons</CardTitle>
+              <CardContent>
+                <p className="text-sm text-slate-600">Catch up on recent sermons and teaching series.</p>
+                <div className="mt-4">
+                  <Link href="/blog">
+                    <Button variant="ghost">View Sermons</Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6">
+              <div className="mx-auto mb-3">
+                <Users className="h-10 w-10 text-[#800020] mx-auto" />
+              </div>
+              <CardTitle className="text-lg">Community</CardTitle>
+              <CardContent>
+                <p className="text-sm text-slate-600">Get connected with groups, ministries and upcoming events.</p>
+                <div className="mt-4">
+                  <Link href="/announcements">
+                    <Button variant="ghost">See Events</Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6">
+              <div className="mx-auto mb-3">
+                <Heart className="h-10 w-10 text-[#800020] mx-auto" />
+              </div>
+              <CardTitle className="text-lg">Give</CardTitle>
+                <CardContent>
+                <p className="text-sm text-slate-600">Partner with our ministry through one-time or recurring giving.</p>
+                <div className="mt-4">
+                  <GivePopup />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Live & Give panel */}
+      <section className="py-6 bg-gray-50">
+        <div className="container">
+          <LiveGivePanel />
+        </div>
+      </section>
+
+      {/* Announcements */}
+      <section className="py-10">
+        <div className="container">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#800020]">Upcoming Events</h2>
+            <Link href="/announcements" className="text-sm text-slate-600 hover:underline">View all</Link>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {announcements?.length ? (
+              announcements.map((a) => (
+                <Card key={a.id} className="overflow-hidden">
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                      <Calendar className="h-4 w-4" />
+                      <span>{new Date(a.date).toLocaleDateString()}</span>
+                    </div>
+                    <CardTitle className="text-lg">{a.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-slate-600 line-clamp-3">{a.content}</p>
+                    {/* Read more removed - showing brief preview on home */}
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="text-sm text-slate-600">No upcoming events.</div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Blog preview */}
+      <section className="py-10 bg-gray-50">
+        <div className="container">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#800020]">Latest from Our Blog</h2>
+            <Link href="/blog" className="text-sm text-slate-600 hover:underline">View all posts</Link>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {blogPosts?.length ? (
+              blogPosts.map((post) => (
+                <Card key={post.id} className="overflow-hidden">
+                  {post.image_url && <img src={post.image_url} alt={post.title} className="w-full h-48 object-cover" />}
+                  <CardHeader>
+                    <CardTitle>{post.title}</CardTitle>
+                    <CardDescription>
+                      By {post.author ?? 'Staff'} • {new Date(post.published_date).toLocaleDateString()}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-slate-600 line-clamp-3">{post.excerpt}</p>
+                    <div className="mt-4">
+                      <Link href={`/blog/${post.id}`} className="text-sm text-[#800020] hover:underline">Read more →</Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="text-sm text-slate-600">No blog posts yet.</div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery CTA */}
+      <section className="py-12">
+        <div className="container">
+          <div className="rounded-lg bg-gradient-to-r from-[#fff1f2] to-[#fff7f8] p-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 className="text-2xl font-bold text-[#800020]">Explore our Gallery</h3>
+              <p className="text-slate-700">Photos from recent events, outreach and church family moments.</p>
+            </div>
+            <div>
+              <Link href="/gallery"><Button>View Gallery</Button></Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container">
-          <div className="grid gap-8 md:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Heart className="h-12 w-12 text-[#800020] mb-4" />
-                <CardTitle>Faith</CardTitle>
-                <CardDescription>Growing deeper in our relationship with Christ</CardDescription>
-              </CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Users className="h-12 w-12 text-[#800020] mb-4" />
-                <CardTitle>Community</CardTitle>
-                <CardDescription>Building meaningful connections and fellowship</CardDescription>
-              </CardHeader>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Heart className="h-12 w-12 text-[#800020] mb-4" />
-                <CardTitle>Service</CardTitle>
-                <CardDescription>Serving others with compassion and love</CardDescription>
-              </CardHeader>
-            </Card>
+      {/* Final CTA */}
+      <section className="py-12 bg-[#800020] text-white">
+        <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 className="text-2xl font-bold">Join us this Sunday</h3>
+            <p className="text-slate-100">Experience worship, teaching and community — everyone is welcome.</p>
+          </div>
+          <div className="flex gap-3">
+            <Link href="/contact"><Button variant="ghost" className="text-white border-white">Contact Us</Button></Link>
           </div>
         </div>
       </section>
-
-      {/* Announcements Section */}
-      <section className="py-16">
-        <div className="container">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-[#800020]">Upcoming Events</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {announcements?.map((announcement) => (
-              <Card key={announcement.id}>
-                <CardHeader>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>{new Date(announcement.date).toLocaleDateString()}</span>
-                  </div>
-                  <CardTitle>{announcement.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{announcement.content}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Blog Posts */}
-      <section className="py-16 bg-gray-50">
-        <div className="container">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-[#800020]">Latest from Our Blog</h2>
-            <Button variant="outline" asChild>
-              <Link href="/blog">View All Posts</Link>
-            </Button>
-          </div>
-          <div className="grid gap-8 md:grid-cols-2">
-            {blogPosts?.map((post) => (
-              <Card key={post.id} className="overflow-hidden">
-                <img
-                  src={post.image_url || "/placeholder.svg?height=300&width=600"}
-                  alt={post.title}
-                  className="w-full h-48 object-cover"
-                />
-                <CardHeader>
-                  <CardTitle>{post.title}</CardTitle>
-                  <CardDescription>
-                    By {post.author} • {new Date(post.published_date).toLocaleDateString()}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">{post.excerpt}</p>
-                  <Button variant="link" className="text-[#800020] p-0" asChild>
-                    <Link href={`/blog/${post.id}`}>Read More →</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
   )
 }

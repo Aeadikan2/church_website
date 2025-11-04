@@ -23,7 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col"
+       style={{
+            backgroundImage: "url('/wfc_trans.jpg')",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+          }}
+      >
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

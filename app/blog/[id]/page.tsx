@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, BookOpen } from "lucide-react"
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -29,16 +29,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             <img
               src={post.image_url || "/placeholder.svg"}
               alt={post.title}
-              className="w-full h-96 object-cover rounded-lg mb-8"
+              className="w-full h-96 object-cover rounded-lg mb-8 transition-transform duration-300 hover:scale-105"
             />
           )}
 
-          <h1 className="text-4xl font-bold mb-4 text-[#800020]">{post.title}</h1>
+          <h1 className="text-4xl font-bold mb-4 text-[#800020] flex items-center gap-3"><BookOpen className="h-6 w-6" />{post.title}</h1>
           <p className="text-muted-foreground mb-8">
             By {post.author} • {new Date(post.published_date).toLocaleDateString()}
           </p>
 
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none transition-opacity duration-300">
             <p className="leading-relaxed whitespace-pre-wrap">{post.content}</p>
           </div>
         </div>

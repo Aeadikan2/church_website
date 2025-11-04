@@ -28,9 +28,8 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
-        options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/admin`,
-        },
+        // cast to any to pass redirectTo through to Supabase at runtime
+        options: ({ redirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/admin` } as any),
       })
       if (error) throw error
       router.push("/admin")
