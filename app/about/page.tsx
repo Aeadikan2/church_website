@@ -17,7 +17,7 @@ export default async function AboutPage() {
       <HeroCarousel
         page="about"
         height={360}
-        title={aboutContent?.title ?? "About Word Faith Church"}
+        title={aboutContent?.title ?? "About The Word-Faith Church"}
         subtitle={aboutContent?.subtitle ?? "Learn who we are, our mission, vision and the heart behind our ministry."}
       />
 
@@ -87,7 +87,7 @@ export default async function AboutPage() {
               </div>
 
               {/* <div className="rounded-lg overflow-hidden border">
-                <img src="/wfc_thicks.jpg" alt="Word Faith Church" className="w-full h-40 object-cover" />
+                <img src="/wfc_thicks.jpg" alt="The Word-Faith Church" className="w-full h-40 object-cover" />
                 <div className="p-4">
                   <h4 className="font-semibold">Visit Us</h4>
                   <p className="text-sm text-slate-600">Sunday services • Midweek prayer • Outreach</p>

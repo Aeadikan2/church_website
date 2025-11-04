@@ -37,9 +37,9 @@ export function SiteFooter() {
           {/* Branding */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Image src="/wfc_thicks.jpg" alt="Word Faith Church" width={48} height={48} className="rounded-full object-cover" />
+              <Image src="/wfc_thicks.jpg" alt="The Word-Faith Church" width={48} height={48} className="rounded-full object-cover" />
               <div>
-                <div className="text-xl font-bold">Word Faith Church</div>
+                <div className="text-xl font-bold">The Word-Faith Church</div>
                 <div className="text-sm text-slate-300">A community devoted to worship, discipleship and service.</div>
               </div>
             </div>
@@ -116,7 +116,7 @@ export function SiteFooter() {
 
   <div className="border-t border-[#5a0e12]">
         <div className="container py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="text-sm text-slate-400">&copy; {new Date().getFullYear()} Word Faith Church. All rights reserved.</div>
+          <div className="text-sm text-slate-400">&copy; {new Date().getFullYear()} The Word-Faith Church. All rights reserved.</div>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="text-sm text-slate-300 hover:text-white">Privacy</Link>
             <Link href="/terms" className="text-sm text-slate-300 hover:text-white">Terms</Link>

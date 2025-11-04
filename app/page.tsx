@@ -40,46 +40,52 @@ export default async function HomePage() {
 
       {/* Highlights */}
       <section className="py-10">
-        <div className="container">
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card className="text-center p-6">
-              <div className="mx-auto mb-3">
-                <BookOpen className="h-10 w-10 text-[#800020] mx-auto" />
+        <div className="container px-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
+            <Card className="text-center p-2 sm:p-4 md:p-6 flex flex-col h-full">
+              <div className="mb-1 sm:mb-2 md:mb-3">
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-[#800020] mx-auto" />
               </div>
-              <CardTitle className="text-lg">Sermons</CardTitle>
-              <CardContent>
-                <p className="text-sm text-slate-600">Catch up on recent sermons and teaching series.</p>
-                <div className="mt-4">
-                  <Link href="/blog">
-                    <Button variant="ghost">View Sermons</Button>
-                  </Link>
-                </div>
+              <CardTitle className="text-xs sm:text-sm md:text-lg mb-1 sm:mb-2">Sermons</CardTitle>
+              <CardContent className="p-0 flex-1 flex flex-col justify-between">
+                <p className="text-[10px] sm:text-xs md:text-sm text-slate-600 mb-2 sm:mb-3 leading-tight">
+                  Catch up on recent sermons and teaching series.
+                </p>
+                <Link href="/blog" className="inline-block">
+                  <Button variant="ghost" size="sm" className="h-7 text-[10px] sm:h-8 sm:text-xs md:h-9 md:text-sm px-2 sm:px-3">
+                    View Sermons
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
-            <Card className="text-center p-6">
-              <div className="mx-auto mb-3">
-                <Users className="h-10 w-10 text-[#800020] mx-auto" />
+            <Card className="text-center p-2 sm:p-4 md:p-6 flex flex-col h-full">
+              <div className="mb-1 sm:mb-2 md:mb-3">
+                <Users className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-[#800020] mx-auto" />
               </div>
-              <CardTitle className="text-lg">Community</CardTitle>
-              <CardContent>
-                <p className="text-sm text-slate-600">Get connected with groups, ministries and upcoming events.</p>
-                <div className="mt-4">
-                  <Link href="/announcements">
-                    <Button variant="ghost">See Events</Button>
-                  </Link>
-                </div>
+              <CardTitle className="text-xs sm:text-sm md:text-lg mb-1 sm:mb-2">Community</CardTitle>
+              <CardContent className="p-0 flex-1 flex flex-col justify-between">
+                <p className="text-[10px] sm:text-xs md:text-sm text-slate-600 mb-2 sm:mb-3 leading-tight">
+                  Get connected with groups, ministries and upcoming events.
+                </p>
+                <Link href="/announcements" className="inline-block">
+                  <Button variant="ghost" size="sm" className="h-7 text-[10px] sm:h-8 sm:text-xs md:h-9 md:text-sm px-2 sm:px-3">
+                    See Events
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
-            <Card className="text-center p-6">
-              <div className="mx-auto mb-3">
-                <Heart className="h-10 w-10 text-[#800020] mx-auto" />
+            <Card className="text-center p-2 sm:p-4 md:p-6 flex flex-col h-full">
+              <div className="mb-1 sm:mb-2 md:mb-3">
+                <Heart className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-[#800020] mx-auto" />
               </div>
-              <CardTitle className="text-lg">Give</CardTitle>
-                <CardContent>
-                <p className="text-sm text-slate-600">Partner with our ministry through one-time or recurring giving.</p>
-                <div className="mt-4">
+              <CardTitle className="text-xs sm:text-sm md:text-lg mb-1 sm:mb-2">Give</CardTitle>
+              <CardContent className="p-0 flex-1 flex flex-col justify-between">
+                <p className="text-[10px] sm:text-xs md:text-sm text-slate-600 mb-2 sm:mb-3 leading-tight">
+                  Partner with our ministry through one-time or recurring giving.
+                </p>
+                <div className="inline-block">
                   <GivePopup />
                 </div>
               </CardContent>
@@ -106,7 +112,7 @@ export default async function HomePage() {
           <div className="grid gap-6 md:grid-cols-3">
             {announcements?.length ? (
               announcements.map((a) => (
-                <Card key={a.id} className="overflow-hidden">
+                <Card key={a.id} className="overflow-hidden w-full min-w-0">
                   <CardHeader>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                       <Calendar className="h-4 w-4" />
@@ -115,7 +121,7 @@ export default async function HomePage() {
                     <CardTitle className="text-lg">{a.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-slate-600 line-clamp-3">{a.content}</p>
+                    <p className="text-sm text-slate-600 line-clamp-3 break-words">{a.content}</p>
                     {/* Read more removed - showing brief preview on home */}
                   </CardContent>
                 </Card>
@@ -138,8 +144,8 @@ export default async function HomePage() {
           <div className="grid gap-8 md:grid-cols-2">
             {blogPosts?.length ? (
               blogPosts.map((post) => (
-                <Card key={post.id} className="overflow-hidden">
-                  {post.image_url && <img src={post.image_url} alt={post.title} className="w-full h-48 object-cover" />}
+                <Card key={post.id} className="overflow-hidden w-full min-w-0">
+                  {post.image_url && <img src={post.image_url} alt={post.title} className="w-full h-48 object-cover max-w-full" />}
                   <CardHeader>
                     <CardTitle>{post.title}</CardTitle>
                     <CardDescription>
@@ -147,7 +153,7 @@ export default async function HomePage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-slate-600 line-clamp-3">{post.excerpt}</p>
+                    <p className="text-sm text-slate-600 line-clamp-3 break-words">{post.excerpt}</p>
                     <div className="mt-4">
                       <Link href={`/blog/${post.id}`} className="text-sm text-[#800020] hover:underline">Read more →</Link>
                     </div>

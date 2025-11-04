@@ -14,7 +14,7 @@ export default async function GalleryPage() {
         page="gallery"
         height={320}
         title={"Moments from Our Community"}
-        subtitle={"Snapshots of worship, fellowship and life at Word Faith Church."}
+        subtitle={"Snapshots of worship, fellowship and life at The Word-Faith Church."}
       />
 
       {/* Gallery Grid */}

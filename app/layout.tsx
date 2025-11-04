@@ -11,7 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Word Faith Church",
+  title: "The Word-Faith Church",
   description: "A place of worship, fellowship, and spiritual growth",
     generator: 'v0.app'
 }
