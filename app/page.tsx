@@ -30,8 +30,8 @@ export default async function HomePage() {
       <HeroCarousel
         page="home"
         height={480}
-        title={"Welcome to Word Faith Church"}
-        subtitle={"A place to grow in faith, worship boldly and serve our community."}
+        title={"Welcome to The Word-Faith Church"}
+        subtitle={"Bringing all to the fullness of Christ, through the teaching/preaching of God's word and the demonstration of the Spirit.."}
         primaryLabel={"Learn More"}
         primaryHref={'/about'}
         secondaryLabel={"Visit Us"}
